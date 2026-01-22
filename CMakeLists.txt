@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # ---------- Qt ----------
-# Suporta Qt6 e Qt5
 find_package(Qt6 COMPONENTS Widgets OpenGL REQUIRED QUIET)
 if(Qt6_FOUND)
   set(QT_MAJOR 6)
@@ -17,8 +16,6 @@ else()
 endif()
 
 # ---------- VTK ----------
-# Modulos necessarios para:
-# - widget Qt + OpenGL
 # - leitura DICOM
 # - viewer 2D
 set(VTK_COMPONENTS
@@ -32,7 +29,6 @@ set(VTK_COMPONENTS
   InteractionImage
   GUISupportQt
 )
-# Suprime warning de cross-compiling do VTK compile tools
 set(VTK_COMPILE_TOOLS_IGNORE_CROSS_COMPILING_WARNING ON CACHE BOOL "" FORCE)
 set(VTK_COMPILE_TOOLS_FIND_QUIETLY ON CACHE BOOL "" FORCE)
 set(vtkcompiletools_FIND_QUIETLY ON CACHE BOOL "" FORCE)
@@ -41,13 +37,11 @@ find_package(VTK QUIET REQUIRED COMPONENTS ${VTK_COMPONENTS})
 # GDCM para fallback de leitura de DICOM comprimido
 find_package(GDCM CONFIG)
 
-# VTK moderno: usar targets, sem VTK_USE_FILE (evita aviso deprecado)
 set(VTK_LIBS)
 foreach(comp ${VTK_COMPONENTS})
   list(APPEND VTK_LIBS "VTK::${comp}")
 endforeach()
 
-# Opcional: suporte a GDCM (DICOM comprimido) se o módulo estiver disponível
 if (TARGET VTK::IOGDCM)
   list(APPEND VTK_LIBS VTK::IOGDCM)
   set(HAS_VTK_IOGDCM TRUE)
@@ -70,7 +64,6 @@ if (HAS_VTK_IOGDCM)
   target_compile_definitions(dicom_viewer PRIVATE HAS_VTK_IOGDCM)
 endif()
 
-# Autoinit para VTK (necessario em varios setups, especialmente no Windows)
 if (VTK_VERSION VERSION_GREATER_EQUAL "9.0.0")
   vtk_module_autoinit(
     TARGETS dicom_viewer
@@ -78,7 +71,6 @@ if (VTK_VERSION VERSION_GREATER_EQUAL "9.0.0")
   )
 endif()
 
-# Qt MOC (para sinais/slots)
 set_target_properties(dicom_viewer PROPERTIES
   AUTOMOC ON
   AUTOUIC OFF
