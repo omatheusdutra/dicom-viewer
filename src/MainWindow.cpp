@@ -260,7 +260,7 @@ void MainWindow::setupUi()
     setCentralWidget(central);
     buildMetadataDock();
 
-    // Evita renderizar sem entrada; só renderizamos após carregar DICOM
+    // Evita renderizar sem entrada; só renderiza após carregar DICOM
 }
 
 static vtkImageData* currentImage(vtkImageAlgorithm* reader, vtkImageData* manual)
@@ -275,7 +275,7 @@ static vtkImageData* currentImage(vtkImageAlgorithm* reader, vtkImageData* manua
 void MainWindow::buildMetadataDock()
 {
     m_metaDock = new QDockWidget(this);
-    // Custom title bar
+
     auto* titleWidget = new QWidget(m_metaDock);
     auto* titleLayout = new QHBoxLayout(titleWidget);
     titleLayout->setContentsMargins(10, 6, 10, 6);
@@ -358,7 +358,7 @@ bool MainWindow::loadDicomFile(const QString& filePath)
 
     auto tryRead = [](vtkImageAlgorithm* reader) -> vtkImageData* {
         const int prev = vtkObject::GetGlobalWarningDisplay();
-        vtkObject::GlobalWarningDisplayOff(); // evita popup/erro no output
+        vtkObject::GlobalWarningDisplayOff(); 
         reader->Update();
         vtkObject::SetGlobalWarningDisplay(prev);
         if (reader->GetErrorCode() != vtkErrorCode::NoError)
@@ -454,10 +454,8 @@ bool MainWindow::loadDicomFile(const QString& filePath)
         m_viewer->SetInputData(img);
     }
 
-    // Ajuste de câmera e render
     m_viewer->GetRenderer()->ResetCamera();
 
-    // Auto window/level simples: usa range do scalar
     double range[2] = {0.0, 0.0};
     img->GetScalarRange(range);
 
@@ -573,6 +571,7 @@ void MainWindow::applyWindowLevel()
     m_viewer->SetColorLevel(m_level);
     if (m_renderWindow) m_renderWindow->Render();
 }
+
 
 void MainWindow::onWindowChanged(int value)
 {
