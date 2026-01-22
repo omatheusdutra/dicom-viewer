@@ -1,0 +1,7 @@
+{
+  "cmake.generator": "Visual Studio 18 2026",
+  "cmake.configureArgs": [
+    "-DCMAKE_TOOLCHAIN_FILE=F:/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "-Wno-dev"
+  ]
+}

@@ -1,0 +1,28 @@
+# Build directories
+build/
+
+# CMake generated
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+
+# Qt / moc / autogen
+*_autogen/
+*.moc
+*.qrc.dep
+
+# VS Code / IDE cache
+.vscode/ipch
+.vscode/*.log
+
+# Binary outputs
+*.obj
+*.pdb
+*.lib
+*.dll
+*.exe
+
+# Misc
+*.user
