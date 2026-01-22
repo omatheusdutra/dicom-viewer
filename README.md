@@ -51,13 +51,6 @@ cmake --build build --config Release
 .\build\Release\dicom_viewer.exe
 ```
 
-### 🐧 Linux/macOS (ajuste paths de Qt/VTK/GDCM)
-```bash
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-cmake --build build -j
-./build/dicom_viewer
-```
-
 ## 📂 Estrutura
 ```
 .
