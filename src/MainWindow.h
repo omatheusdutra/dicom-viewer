@@ -46,7 +46,6 @@ private:
     QDockWidget* m_metaDock = nullptr;
     QMap<QString, QLabel*> m_metaLabels;
 
-    // (Opcional/diferencial) Window/Level sliders
     QSlider* m_windowSlider = nullptr;
     QSlider* m_levelSlider = nullptr;
 
@@ -55,7 +54,7 @@ private:
     vtkSmartPointer<vtkImageViewer2> m_viewer;
     vtkSmartPointer<vtkImageAlgorithm> m_reader;
     vtkSmartPointer<vtkTrivialProducer> m_dummyProducer;
-    vtkSmartPointer<vtkImageData> m_manualImage; // usado quando GDCM decodifica manualmente
+    vtkSmartPointer<vtkImageData> m_manualImage; 
 
     double m_window = 400.0;
     double m_level  = 40.0;
